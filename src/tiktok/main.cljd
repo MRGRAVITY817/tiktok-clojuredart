@@ -1,22 +1,12 @@
 (ns tiktok.main
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]
-            [tiktok.constants.gaps :refer [gaps]]))
+            [tiktok.screens.sign-up.sign-up-screen :refer [sign_up_screen]]))
 
 (defn main []
   (f/run
    (m/MaterialApp
     .title "TikTok"
-    .home
-    (m/Scaffold
-     .appBar (m/AppBar
-              .title (m/Text "TikTok"))
-     .body (m/Center
-            .child
-            (m/Column
-             .children
-             [(m/Text "Hello, World!")
-              (gaps :v12)
-              (m/Text "Hello, World Too!")]))))))
+    .home (sign_up_screen))))
 
 

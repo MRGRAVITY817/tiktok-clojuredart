@@ -1,0 +1,30 @@
+(ns tiktok.screens.sign-up.sign-up-screen
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]
+            [tiktok.constants.gaps :refer [gaps]]
+            [tiktok.constants.sizes :refer [sizes]]))
+
+(defn sign_up_screen []
+  (f/widget
+   :context ctx
+   :let [screen-width (-> ctx m/MediaQuery.of .-size .-width)]
+   (m/Scaffold
+    .body
+    (m/SafeArea
+     .child
+     (m/Container
+      .width screen-width
+      .padding (m/EdgeInsets.all (sizes :size28))
+      .child
+      (m/Column
+       .crossAxisAlignment m/CrossAxisAlignment.center
+       .children
+       [(gaps :v80),
+        (m/Text "Sign up for TikTok"
+                .style (m/TextStyle :fontSize   (sizes :size24)
+                                    :fontWeight m/FontWeight.bold)),
+        (gaps :v20),
+        (m/Text "Create a profile, follow other accounts, and make your own videos."
+                .textAlign m/TextAlign.center
+                .style    (m/TextStyle :fontSize (sizes :size14)
+                                       :color    m/Colors.black45))]))))))

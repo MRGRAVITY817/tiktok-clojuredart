@@ -6,14 +6,58 @@
 
 (defn login-screen []
   (f/widget
+   :context ctx
+   :let [screen-width (-> ctx m/MediaQuery.of .-size .-width)
+         primary-color (-> ctx m/Theme.of .-primaryColor)
+         on-signup-tap (-> ctx m/Navigator.of .-pop)]
    (m/Scaffold
-    .appBar (m/AppBar
-             .title (m/Text "Login to TikTok"))
-    .body (m/SafeArea
-           .child
-           (m/Center
-            .child
-            (m/Text "Login Screen"))))))
+
+    .body
+    (m/SafeArea
+     .child
+     (m/Container
+      .width screen-width
+      .padding (m/EdgeInsets.symmetric .horizontal (sizes :size28))
+      .child
+      (m/Column
+       .crossAxisAlignment m/CrossAxisAlignment.center
+       .children
+       [(gaps :v80),
+        (m/Text
+         "Log in to TikTok"
+         .style (m/TextStyle .fontSize   (sizes :size24)
+                             .fontWeight m/FontWeight.bold)),
+        (gaps :v20),
+        (m/Text
+         "Create a profile, follow other accounts, and make your own videos."
+         .textAlign m/TextAlign.center
+         .style    (m/TextStyle
+                    .fontSize (sizes :size14)
+                    .color    m/Colors.black45))])))
+
+    .bottomNavigationBar
+    (m/BottomAppBar
+     .color m/Colors.grey.shade50
+     .elevation 1
+     .child
+     (m/Row
+      .mainAxisAlignment m/MainAxisAlignment.center
+      .children
+      [(m/Text
+        "Already have an account?"
+        .style (m/TextStyle
+                .fontSize (sizes :size16)
+                .color m/Colors.black45)),
+       (gaps :h8),
+       (m/GestureDetector
+        .onTap on-signup-tap
+        .child
+        (m/Text
+         "Sign up"
+         .style (m/TextStyle
+                 .fontSize  (sizes :size16)
+                 .fontWeight m/FontWeight.bold
+                 .color      primary-color)))])))))
 
 
 

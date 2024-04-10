@@ -3,6 +3,7 @@
             [cljd.flutter :as f]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]
+            [tiktok.features.authentication.widgets.auth-button :refer [auth-button]]
             [tiktok.features.authentication.login-screen :refer [login-screen]]))
 
 ;; Add documentation for the function
@@ -26,18 +27,33 @@
       (m/Column
        .crossAxisAlignment m/CrossAxisAlignment.center
        .children
-       [(gaps :v80),
+       [(gaps :v80)
         (m/Text
          "Sign up for TikTok"
          .style (m/TextStyle .fontSize   (sizes :size24)
-                             .fontWeight m/FontWeight.bold)),
-        (gaps :v20),
+                             .fontWeight m/FontWeight.bold))
+        (gaps :v20)
         (m/Text
          "Create a profile, follow other accounts, and make your own videos."
          .textAlign m/TextAlign.center
          .style    (m/TextStyle
                     .fontSize (sizes :size14)
-                    .color    m/Colors.black45))])))
+                    .color    m/Colors.black45))
+        (gaps :v20)
+        (auth-button
+         {:text "Sign up with Google"
+          :icon (m/Icons.account_circle)
+          :on-tap (fn [] (print "Sign up with Google"))})
+        (gaps :v20)
+        (auth-button
+         {:text "Sign up with Apple"
+          :icon (m/Icons.account_circle)
+          :on-tap (fn [] (print "Sign up with Google"))})
+        (gaps :v20)
+        (auth-button
+         {:text "Sign up with Google"
+          :icon (m/Icons.account_circle)
+          :on-tap (fn [] (print "Sign up with Google"))})])))
 
     .bottomNavigationBar
     (m/BottomAppBar

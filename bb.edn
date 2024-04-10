@@ -1,0 +1,2 @@
+{:tasks {init    (shell "clj -M:cljd init")
+         run     (shell "clj -M:cljd flutter")}}

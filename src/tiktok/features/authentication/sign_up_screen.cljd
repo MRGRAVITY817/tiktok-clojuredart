@@ -1,0 +1,66 @@
+(ns tiktok.features.authentication.sign-up-screen
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]
+            [tiktok.constants.gaps :refer [gaps]]
+            [tiktok.constants.sizes :refer [sizes]]
+            [tiktok.features.authentication.login-screen :refer [login-screen]]))
+
+;; Add documentation for the function
+(defn sign_up_screen []
+  (f/widget
+   :context ctx
+   :let [screen-width (-> ctx m/MediaQuery.of .-size .-width)
+         primary-color (-> ctx m/Theme.of .-primaryColor)
+         on-login-tap (fn [] ((-> ctx m/Navigator.of .-push)
+                              (m/MaterialPageRoute
+                               :builder (fn [_ctx] (login-screen)))))]
+   (m/Scaffold
+
+    .body
+    (m/SafeArea
+     .child
+     (m/Container
+      .width screen-width
+      .padding (m/EdgeInsets.symmetric .horizontal (sizes :size28))
+      .child
+      (m/Column
+       .crossAxisAlignment m/CrossAxisAlignment.center
+       .children
+       [(gaps :v80),
+        (m/Text
+         "Sign up for TikTok"
+         .style (m/TextStyle :fontSize   (sizes :size24)
+                             :fontWeight m/FontWeight.bold)),
+        (gaps :v20),
+        (m/Text
+         "Create a profile, follow other accounts, and make your own videos."
+         .textAlign m/TextAlign.center
+         .style    (m/TextStyle
+                    :fontSize (sizes :size14)
+                    :color    m/Colors.black45))])))
+
+    .bottomNavigationBar
+    (m/BottomAppBar
+     .color m/Colors.grey.shade50
+     .elevation 1
+     .child
+     (m/Row
+      .mainAxisAlignment m/MainAxisAlignment.center
+      .children
+      [(m/Text
+        "Already have an account?"
+        .style (m/TextStyle
+                :fontSize (sizes :size16)
+                :color m/Colors.black45)),
+       (m/TextButton
+        .onPressed (fn [] (print "Sign in"))
+        .child
+        (m/GestureDetector
+         .onTap on-login-tap
+         .child
+         (m/Text
+          "Sign in"
+          .style (m/TextStyle
+                  :fontSize  (sizes :size16)
+                  :fontWeight m/FontWeight.bold
+                  :color      primary-color))))])))))

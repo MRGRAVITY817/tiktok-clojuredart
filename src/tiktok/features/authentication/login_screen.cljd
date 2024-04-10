@@ -1,0 +1,20 @@
+(ns tiktok.features.authentication.login-screen
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]
+            [tiktok.constants.gaps :refer [gaps]]
+            [tiktok.constants.sizes :refer [sizes]]))
+
+(defn login-screen []
+  (f/widget
+   (m/Scaffold
+    .appBar (m/AppBar
+             .title (m/Text "Login to TikTok"))
+    .body (m/SafeArea
+           .child
+           (m/Center
+            .child
+            (m/Text "Login Screen"))))))
+
+
+
+

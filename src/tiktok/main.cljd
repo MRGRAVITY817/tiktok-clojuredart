@@ -1,12 +1,14 @@
 (ns tiktok.main
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]
-            [tiktok.screens.sign-up.sign-up-screen :refer [sign_up_screen]]))
+            [tiktok.features.authentication.sign-up-screen :refer [sign_up_screen]]))
 
 (defn main []
   (f/run
    (m/MaterialApp
     .title "TikTok"
+    .theme (m/ThemeData
+            .primaryColor (m/Color 0xFFE9435A))
     .home (sign_up_screen))))
 
 

@@ -49,3 +49,4 @@ lib/cljd-out/
 test/cljd-out/
 .clj-kondo
 .lsp
+.nrepl-port

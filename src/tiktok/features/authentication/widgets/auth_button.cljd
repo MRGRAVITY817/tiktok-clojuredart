@@ -1,6 +1,5 @@
 (ns tiktok.features.authentication.widgets.auth-button
   (:require ["package:flutter/material.dart" :as m]
-            [cljd.flutter :as f]
             [tiktok.constants.sizes :refer [sizes]]))
 
 (defn auth-button [{:keys [text icon on-tap]}]
@@ -12,15 +11,24 @@
                  .border (m/Border.all
                           .color m/Colors.grey.shade300
                           .width 1))
-    .padding (m/EdgeInsets.symmetric .vertical (sizes :size12))
+    .padding (m/EdgeInsets.symmetric .vertical (sizes :size12)
+                                     .horizontal (sizes :size16))
 
     .child
-    (m/Text
-     text
-     .textAlign m/TextAlign.center
-     .style (m/TextStyle
-             .fontSize (sizes :size16)
-             .fontWeight m/FontWeight.bold)))))
+    (m/Stack
+     .children
+     [(m/Align
+       .alignment m/Alignment.centerLeft
+       .child icon)
+      (m/Align
+       .alignment m/Alignment.center
+       .child
+       (m/Text text
+               .textAlign m/TextAlign.center
+               .style (m/TextStyle
+                       .fontSize (sizes :size16)
+                       .fontWeight m/FontWeight.bold)))]))))
+
 
 
 

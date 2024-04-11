@@ -1,5 +1,6 @@
 (ns tiktok.features.authentication.sign-up-screen
   (:require ["package:flutter/material.dart" :as m]
+            ["package:font_awesome_flutter/font_awesome_flutter.dart" :as fa]
             [cljd.flutter :as f]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]
@@ -41,19 +42,14 @@
                     .color    m/Colors.black45))
         (gaps :v20)
         (auth-button
-         {:text "Sign up with Google"
-          :icon (m/Icons.account_circle)
-          :on-tap (fn [] (print "Sign up with Google"))})
+         {:text "Use phone or email"
+          :icon (fa/FaIcon fa/FontAwesomeIcons.user)
+          :on-tap (fn [] (print "Use phone or email"))})
         (gaps :v20)
         (auth-button
          {:text "Sign up with Apple"
-          :icon (m/Icons.account_circle)
-          :on-tap (fn [] (print "Sign up with Google"))})
-        (gaps :v20)
-        (auth-button
-         {:text "Sign up with Google"
-          :icon (m/Icons.account_circle)
-          :on-tap (fn [] (print "Sign up with Google"))})])))
+          :icon (fa/FaIcon fa/FontAwesomeIcons.apple)
+          :on-tap (fn [] (print "Sign up with Apple"))})])))
 
     .bottomNavigationBar
     (m/BottomAppBar

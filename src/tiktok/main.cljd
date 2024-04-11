@@ -1,6 +1,7 @@
 (ns tiktok.main
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]
+            [tiktok.constants.sizes :refer [sizes]]
             [tiktok.features.authentication.sign-up-screen :refer [sign-up-screen]]))
 
 (defn main []
@@ -8,7 +9,16 @@
    (m/MaterialApp
     .title "TikTok"
     .theme (m/ThemeData
-            .primaryColor (m/Color 0xFFE9435A))
+            .primaryColor            (m/Color 0xFFE9435A)
+            .appBarTheme             (m/AppBarTheme
+                                      .foregroundColor (m/Colors.grey.shade900)
+                                      .backgroundColor (m/Colors.white)
+                                      .elevation        0
+                                      .titleTextStyle  (m/TextStyle
+                                                        .color m/Colors.grey.shade900
+                                                        .fontSize (+ (sizes :size16) (sizes :size2))
+                                                        .fontWeight m/FontWeight.bold))
+            .scaffoldBackgroundColor (m/Color 0xFFFFFFFF))
     .home (sign-up-screen))))
 
 

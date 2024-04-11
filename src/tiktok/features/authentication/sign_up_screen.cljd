@@ -6,7 +6,8 @@
             [tiktok.constants.sizes :refer [sizes]]
             [tiktok.utils.navigate-to :refer [navigate-to]]
             [tiktok.features.authentication.widgets.auth-button :refer [auth-button]]
-            [tiktok.features.authentication.login-screen :refer [login-screen]]))
+            [tiktok.features.authentication.login-screen :refer [login-screen]]
+            [tiktok.features.authentication.email-screen :refer [email-screen]]))
 
 ;; Add documentation for the function
 (defn sign-up-screen []
@@ -14,7 +15,7 @@
    :context ctx
    :let [screen-width (-> ctx m/MediaQuery.of .-size .-width)
          primary-color (-> ctx m/Theme.of .-primaryColor)
-         on-tap-email-password (fn [] (print "Use email and password"))
+         on-tap-email-password  (partial navigate-to ctx email-screen)
          on-login-tap (partial navigate-to ctx login-screen)]
    (m/Scaffold
 

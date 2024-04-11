@@ -5,7 +5,8 @@
             [tiktok.features.authentication.email-screen :refer [email-screen]]
             [tiktok.utils.navigate-to :refer [navigate-to]]
             [tiktok.constants.gaps :refer [gaps]]
-            [tiktok.constants.sizes :refer [sizes]]))
+            [tiktok.constants.sizes :refer [sizes]]
+            [tiktok.widget.unfocus-keyboard-box :refer [unfocus-keyboard-box]]))
 
 (defn username-screen []
   (f/widget
@@ -16,38 +17,39 @@
          _ ((.-addListener controller)
             (fn [] (reset! username (.-text controller))))]
    :watch [un username]
-   (m/Scaffold
-    .appBar (m/AppBar
-             .title (m/Text "Sign Up"))
-    .body
-    (m/Padding
-     .padding (m/EdgeInsets.symmetric
-               .horizontal (sizes :size28)
-               .vertical   (sizes :size20))
-     .child
-     (m/Column
-      .crossAxisAlignment m/CrossAxisAlignment.start
-      .children
-      [(m/Text
-        "Create username"
-        .style (m/TextStyle
-                .fontSize (sizes :size20)
-                .fontWeight m/FontWeight.bold))
-       (gaps :v10)
-       (m/Text "You can always change it later."
-               .style (m/TextStyle
-                       .fontSize (sizes :size14)
-                       .color m/Colors.black54))
-       (gaps :v20)
-       (m/TextField
-        .controller controller
-        .decoration (m/InputDecoration
-                     .hintText "Username"
-                     .enabledBorder (m/UnderlineInputBorder
-                                     .borderSide (m/BorderSide
-                                                  .color m/Colors.grey.shade300))
-                     .focusedBorder (m/UnderlineInputBorder
-                                     .borderSide (m/BorderSide
-                                                  .color m/Colors.grey.shade300))))
-       (gaps :v32)
-       (form-button {:disabled (empty? un) :on-tap on-tap-next})])))))
+   (unfocus-keyboard-box
+    (m/Scaffold
+     .appBar (m/AppBar
+              .title (m/Text "Sign Up"))
+     .body
+     (m/Padding
+      .padding (m/EdgeInsets.symmetric
+                .horizontal (sizes :size28)
+                .vertical   (sizes :size20))
+      .child
+      (m/Column
+       .crossAxisAlignment m/CrossAxisAlignment.start
+       .children
+       [(m/Text
+         "Create username"
+         .style (m/TextStyle
+                 .fontSize (sizes :size20)
+                 .fontWeight m/FontWeight.bold))
+        (gaps :v10)
+        (m/Text "You can always change it later."
+                .style (m/TextStyle
+                        .fontSize (sizes :size14)
+                        .color m/Colors.black54))
+        (gaps :v20)
+        (m/TextField
+         .controller controller
+         .decoration (m/InputDecoration
+                      .hintText "Username"
+                      .enabledBorder (m/UnderlineInputBorder
+                                      .borderSide (m/BorderSide
+                                                   .color m/Colors.grey.shade300))
+                      .focusedBorder (m/UnderlineInputBorder
+                                      .borderSide (m/BorderSide
+                                                   .color m/Colors.grey.shade300))))
+        (gaps :v32)
+        (form-button {:disabled (empty? un) :on-tap on-tap-next})]))))))

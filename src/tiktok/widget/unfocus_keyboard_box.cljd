@@ -1,0 +1,15 @@
+(ns tiktok.widget.unfocus-keyboard-box
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]))
+
+(defn unfocus-keyboard [context]
+  (-> context m/FocusScope.of .-unfocus))
+
+(defn unfocus-keyboard-box
+  "Unfocus keyboard when tapped outside of text field"
+  [child]
+  (f/widget
+   :context ctx
+   (m/GestureDetector
+    .onTap (unfocus-keyboard ctx)
+    .child child)))

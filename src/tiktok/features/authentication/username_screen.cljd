@@ -2,13 +2,17 @@
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]
             [tiktok.features.authentication.widgets.form-button :refer [form-button]]
+            [tiktok.features.authentication.email-screen :refer [email-screen]]
+            [tiktok.utils.navigate-to :refer [navigate-to]]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]))
 
 (defn username-screen []
   (f/widget
+   :context ctx
    :managed [controller (m/TextEditingController)]
    :let [username (atom "")
+         on-tap-next #(navigate-to ctx email-screen)
          _ ((.-addListener controller)
             (fn [] (reset! username (.-text controller))))]
    :watch [un username]
@@ -46,4 +50,4 @@
                                      .borderSide (m/BorderSide
                                                   .color m/Colors.grey.shade300))))
        (gaps :v32)
-       (form-button {:disabled (empty? un)})])))))
+       (form-button {:disabled (empty? un) :on-tap on-tap-next})])))))

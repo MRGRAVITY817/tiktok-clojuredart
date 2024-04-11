@@ -1,7 +1,49 @@
 (ns tiktok.features.authentication.email-screen
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]
+            [tiktok.features.authentication.widgets.form-button :refer [form-button]]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]))
 
-
+(defn email-screen []
+  (f/widget
+   :managed [controller (m/TextEditingController)]
+   :let [username (atom "")
+         _ ((.-addListener controller)
+            (fn [] (reset! username (.-text controller))))]
+   :watch [un username]
+   (m/Scaffold
+    .appBar (m/AppBar
+             .title (m/Text "Sign Up"))
+    .body
+    (m/Padding
+     .padding (m/EdgeInsets.symmetric
+               .horizontal (sizes :size28)
+               .vertical   (sizes :size20))
+     .child
+     (m/Column
+      .crossAxisAlignment m/CrossAxisAlignment.start
+      .children
+      [(m/Text
+        "Enter your email address"
+        .style (m/TextStyle
+                .fontSize (sizes :size20)
+                .fontWeight m/FontWeight.bold))
+       (gaps :v10)
+       (m/Text "Enter your email address to create an account."
+               .style (m/TextStyle
+                       .fontSize (sizes :size14)
+                       .color m/Colors.black54))
+       (gaps :v20)
+       (m/TextField
+        .controller controller
+        .decoration (m/InputDecoration
+                     .hintText "Email"
+                     .enabledBorder (m/UnderlineInputBorder
+                                     .borderSide (m/BorderSide
+                                                  .color m/Colors.grey.shade300))
+                     .focusedBorder (m/UnderlineInputBorder
+                                     .borderSide (m/BorderSide
+                                                  .color m/Colors.grey.shade300))))
+       (gaps :v32)
+       (form-button {:disabled (empty? un)})])))))

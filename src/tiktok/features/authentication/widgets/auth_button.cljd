@@ -3,31 +3,34 @@
             [tiktok.constants.sizes :refer [sizes]]))
 
 (defn auth-button [{:keys [text icon on-tap]}]
-  (m/FractionallySizedBox
-   .widthFactor 1
+  (m/GestureDetector
+   .onTap on-tap
    .child
-   (m/Container
-    .decoration (m/BoxDecoration
-                 .border (m/Border.all
-                          .color m/Colors.grey.shade300
-                          .width 1))
-    .padding (m/EdgeInsets.symmetric .vertical (sizes :size12)
-                                     .horizontal (sizes :size16))
-
+   (m/FractionallySizedBox
+    .widthFactor 1
     .child
-    (m/Stack
-     .children
-     [(m/Align
-       .alignment m/Alignment.centerLeft
-       .child icon)
-      (m/Align
-       .alignment m/Alignment.center
-       .child
-       (m/Text text
-               .textAlign m/TextAlign.center
-               .style (m/TextStyle
-                       .fontSize (sizes :size16)
-                       .fontWeight m/FontWeight.bold)))]))))
+    (m/Container
+     .decoration (m/BoxDecoration
+                  .border (m/Border.all
+                           .color m/Colors.grey.shade300
+                           .width 1))
+     .padding    (m/EdgeInsets.symmetric
+                  .vertical (sizes :size12)
+                  .horizontal (sizes :size16))
+     .child
+     (m/Stack
+      .children
+      [(m/Align
+        .alignment m/Alignment.centerLeft
+        .child icon)
+       (m/Align
+        .alignment m/Alignment.center
+        .child
+        (m/Text text
+                .textAlign m/TextAlign.center
+                .style (m/TextStyle
+                        .fontSize (sizes :size16)
+                        .fontWeight m/FontWeight.bold)))])))))
 
 
 

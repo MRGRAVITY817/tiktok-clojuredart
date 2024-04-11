@@ -1,0 +1,11 @@
+(ns tiktok.features.authentication.email-screen
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]
+            [tiktok.features.authentication.widgets.auth-button :refer [auth-button]]
+            [tiktok.constants.gaps :refer [gaps]]
+            [tiktok.constants.sizes :refer [sizes]]))
+
+(defn email-screen []
+  (f/widget
+   (m/Scaffold
+    .appBar (m/AppBar .title (m/Text "Sign Up")))))

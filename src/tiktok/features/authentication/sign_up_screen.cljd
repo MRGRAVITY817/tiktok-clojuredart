@@ -4,6 +4,7 @@
             [cljd.flutter :as f]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]
+            [tiktok.utils.navigate-to :refer [navigate-to]]
             [tiktok.features.authentication.widgets.auth-button :refer [auth-button]]
             [tiktok.features.authentication.login-screen :refer [login-screen]]))
 
@@ -13,9 +14,8 @@
    :context ctx
    :let [screen-width (-> ctx m/MediaQuery.of .-size .-width)
          primary-color (-> ctx m/Theme.of .-primaryColor)
-         on-login-tap (fn [] ((-> ctx m/Navigator.of .-push)
-                              (m/MaterialPageRoute
-                               .builder (fn [_ctx] (login-screen)))))]
+         on-tap-email-password (fn [] (print "Use email and password"))
+         on-login-tap (partial navigate-to ctx login-screen)]
    (m/Scaffold
 
     .body
@@ -44,7 +44,7 @@
         (auth-button
          {:text "Use email and password"
           :icon (fa/FaIcon fa/FontAwesomeIcons.user)
-          :on-tap (fn [] (print "Use phone or email"))})
+          :on-tap on-tap-email-password})
         (gaps :v20)
         (auth-button
          {:text "Sign up with Apple"

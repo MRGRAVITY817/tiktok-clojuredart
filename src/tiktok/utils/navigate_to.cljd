@@ -1,0 +1,9 @@
+(ns tiktok.utils.navigate-to
+  (:require ["package:flutter/material.dart" :as m]))
+
+(defn navigate-to
+  "Navigate to screen by pushing to MaterialPageRoute"
+  [context screen]
+  ((-> context m/Navigator.of .-push)
+   (m/MaterialPageRoute
+    .builder (fn [_ctx] (screen)))))

@@ -5,6 +5,13 @@
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]))
 
+(defn- email-valid? [email]
+  (if (empty? email)
+    nil
+    (if (nil? (re-find #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" email))
+      "Email not valid"
+      nil)))
+
 (defn email-screen []
   (f/widget
    :managed [controller (m/TextEditingController)]
@@ -25,25 +32,23 @@
       .crossAxisAlignment m/CrossAxisAlignment.start
       .children
       [(m/Text
-        "Enter your email address"
+        "What is your email address?"
         .style (m/TextStyle
                 .fontSize (sizes :size20)
                 .fontWeight m/FontWeight.bold))
-       (gaps :v10)
-       (m/Text "Enter your email address to create an account."
-               .style (m/TextStyle
-                       .fontSize (sizes :size14)
-                       .color m/Colors.black54))
        (gaps :v20)
        (m/TextField
-        .controller controller
-        .decoration (m/InputDecoration
-                     .hintText "Email"
-                     .enabledBorder (m/UnderlineInputBorder
-                                     .borderSide (m/BorderSide
-                                                  .color m/Colors.grey.shade300))
-                     .focusedBorder (m/UnderlineInputBorder
-                                     .borderSide (m/BorderSide
-                                                  .color m/Colors.grey.shade300))))
+        .controller   controller
+        .keyboardType m/TextInputType.emailAddress
+        .autocorrect  false
+        .decoration   (m/InputDecoration
+                       .hintText "Email"
+                       .errorText (email-valid? un)
+                       .enabledBorder (m/UnderlineInputBorder
+                                       .borderSide (m/BorderSide
+                                                    .color m/Colors.grey.shade300))
+                       .focusedBorder (m/UnderlineInputBorder
+                                       .borderSide (m/BorderSide
+                                                    .color m/Colors.grey.shade300))))
        (gaps :v32)
        (form-button {:disabled (empty? un)})])))))

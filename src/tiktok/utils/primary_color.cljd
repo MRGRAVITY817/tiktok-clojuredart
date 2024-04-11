@@ -1,0 +1,7 @@
+(ns tiktok.utils.primary-color
+  (:require ["package:flutter/material.dart" :as m]))
+
+(defn primary-color
+  "Get primary color from context"
+  [context]
+  (-> context m/Theme.of .-primaryColor))

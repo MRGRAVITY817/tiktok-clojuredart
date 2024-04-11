@@ -1,5 +1,6 @@
 (ns tiktok.features.authentication.username-screen
   (:require ["package:flutter/material.dart" :as m]
+            [tiktok.utils.primary-color :refer [primary-color]]
             [cljd.flutter :as f]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]))
@@ -8,6 +9,11 @@
   (f/widget
    :context ctx
    :managed [controller (m/TextEditingController)]
+   :let [username (atom "")
+         primary-color (primary-color ctx)
+         _ ((.-addListener controller)
+            (fn [] (reset! username (.text controller))))]
+   :watch [un username]
    (m/Scaffold
     .appBar (m/AppBar
              .title (m/Text "Sign Up"))
@@ -51,7 +57,7 @@
                       .vertical (sizes :size16)
                       .horizontal (sizes :size28))
          .decoration (m/BoxDecoration
-                      .color (-> ctx m/Theme.of .-primaryColor))
+                      .color (if (empty? un) m/Colors.grey.shade300 primary-color))
          .child
          (m/Text
           "Next"

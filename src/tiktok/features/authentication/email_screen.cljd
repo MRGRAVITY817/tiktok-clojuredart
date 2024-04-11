@@ -6,6 +6,8 @@
 
 (defn email-screen []
   (f/widget
+   :context ctx
+   :managed [controller (m/TextEditingController)]
    (m/Scaffold
     .appBar (m/AppBar
              .title (m/Text "Sign Up"))
@@ -27,4 +29,34 @@
        (m/Text "You can always change it later."
                .style (m/TextStyle
                        .fontSize (sizes :size14)
-                       .color m/Colors.black54))])))))
+                       .color m/Colors.black54))
+       (gaps :v20)
+       (m/TextField
+        .controller controller
+        .decoration (m/InputDecoration
+                     .hintText "Username"
+                     .enabledBorder (m/UnderlineInputBorder
+                                     .borderSide (m/BorderSide
+                                                  .color m/Colors.grey.shade300))
+                     .focusedBorder (m/UnderlineInputBorder
+                                     .borderSide (m/BorderSide
+                                                  .color m/Colors.grey.shade300)))
+        .onChanged (fn [text] (dart:core/print text)))
+       (gaps :v32)
+       (m/FractionallySizedBox
+        .widthFactor 1
+        .child
+        (m/Container
+         .padding    (m/EdgeInsets.symmetric
+                      .vertical (sizes :size16)
+                      .horizontal (sizes :size28))
+         .decoration (m/BoxDecoration
+                      .color (-> ctx m/Theme.of .-primaryColor))
+         .child
+         (m/Text
+          "Next"
+          .textAlign m/TextAlign.center
+          .style (m/TextStyle
+                  .color m/Colors.white
+                  .fontSize (sizes :size16)
+                  .fontWeight (m/FontWeight.bold)))))])))))

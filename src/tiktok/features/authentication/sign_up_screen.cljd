@@ -42,7 +42,7 @@
                     .color    m/Colors.black45))
         (gaps :v20)
         (auth-button
-         {:text "Use phone or email"
+         {:text "Use email and password"
           :icon (fa/FaIcon fa/FontAwesomeIcons.user)
           :on-tap (fn [] (print "Use phone or email"))})
         (gaps :v20)

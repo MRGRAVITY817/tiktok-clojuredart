@@ -1,6 +1,8 @@
 (ns tiktok.features.authentication.login-screen
   (:require ["package:flutter/material.dart" :as m]
+            ["package:font_awesome_flutter/font_awesome_flutter.dart" :as fa]
             [cljd.flutter :as f]
+            [tiktok.features.authentication.widgets.auth-button :refer [auth-button]]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]))
 
@@ -29,11 +31,22 @@
                              .fontWeight m/FontWeight.bold)),
         (gaps :v20),
         (m/Text
-         "Create a profile, follow other accounts, and make your own videos."
+         "Manage your account, check notifications, and watch videos."
          .textAlign m/TextAlign.center
          .style    (m/TextStyle
                     .fontSize (sizes :size14)
-                    .color    m/Colors.black45))])))
+                    .color    m/Colors.black45))
+
+        (gaps :v20)
+        (auth-button
+         {:text "Use email and password"
+          :icon (fa/FaIcon fa/FontAwesomeIcons.user)
+          :on-tap (fn [] (print "Use phone or email"))})
+        (gaps :v20)
+        (auth-button
+         {:text "Sign up with Apple"
+          :icon (fa/FaIcon fa/FontAwesomeIcons.apple)
+          :on-tap (fn [] (print "Sign up with Apple"))})])))
 
     .bottomNavigationBar
     (m/BottomAppBar

@@ -1,16 +1,14 @@
 (ns tiktok.features.authentication.username-screen
   (:require ["package:flutter/material.dart" :as m]
-            [tiktok.utils.primary-color :refer [primary-color]]
             [cljd.flutter :as f]
+            [tiktok.features.authentication.widgets.form-button :refer [form-button]]
             [tiktok.constants.gaps :refer [gaps]]
             [tiktok.constants.sizes :refer [sizes]]))
 
 (defn username-screen []
   (f/widget
-   :context ctx
    :managed [controller (m/TextEditingController)]
    :let [username (atom "")
-         primary-color (primary-color ctx)
          _ ((.-addListener controller)
             (fn [] (reset! username (.-text controller))))]
    :watch [un username]
@@ -48,21 +46,4 @@
                                      .borderSide (m/BorderSide
                                                   .color m/Colors.grey.shade300))))
        (gaps :v32)
-       (m/FractionallySizedBox
-        .widthFactor 1
-        .child
-        (m/AnimatedContainer
-         .duration (Duration .milliseconds 300)
-         .padding    (m/EdgeInsets.symmetric
-                      .vertical (sizes :size16)
-                      .horizontal (sizes :size28))
-         .decoration (m/BoxDecoration
-                      .color (if (empty? un) m/Colors.grey.shade300 primary-color))
-         .child
-         (m/Text
-          "Next"
-          .textAlign m/TextAlign.center
-          .style (m/TextStyle
-                  .color m/Colors.white
-                  .fontSize (sizes :size16)
-                  .fontWeight (m/FontWeight.bold)))))])))))
+       (form-button {:disabled (empty? un)})])))))

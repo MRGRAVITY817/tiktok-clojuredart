@@ -1,0 +1,36 @@
+(ns tiktok.features.authentication.widgets.form-button
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]
+            [tiktok.constants.sizes :refer [sizes]]
+            [tiktok.utils.primary-color :as pc]))
+
+(defn form-button [{:keys [disabled]}]
+  (f/widget
+   :context ctx
+   :let [primary-color (pc/primary-color ctx)]
+   (m/FractionallySizedBox
+    .widthFactor 1
+    .child
+    (m/AnimatedContainer
+     .duration (Duration .milliseconds 300)
+     .padding    (m/EdgeInsets.symmetric
+                  .vertical (sizes :size16)
+                  .horizontal (sizes :size28))
+     .decoration (m/BoxDecoration
+                  .color (if disabled
+                           m/Colors.grey.shade300
+                           primary-color)
+                  .borderRadius (m/BorderRadius.circular (sizes :size4)))
+     .child
+     (m/AnimatedDefaultTextStyle
+      .duration (Duration .milliseconds 300)
+      .style (m/TextStyle
+              .color (if disabled
+                       m/Colors.grey.shade400
+                       m/Colors.white)
+              .fontSize (sizes :size16)
+              .fontWeight (m/FontWeight.bold))
+      .child
+      (m/Text
+       "Next"
+       .textAlign m/TextAlign.center))))))
